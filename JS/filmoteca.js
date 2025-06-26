@@ -15,7 +15,10 @@ var peliculas = [
     new Pelicula("28 semanas después", "Seis meses después del brote inicial, Londres intenta repoblarse, pero el virus vuelve a propagarse.", "Terror/Zombies", 2007, "IMAGENES/film3.jpg"),
     new Pelicula("REC", "Una reportera y su camarógrafo quedan atrapados en un edificio infectado por un virus mortal.", "Terror/Zombies", 2007, "IMAGENES/film4.jpg"),
     new Pelicula("El amanecer de los muertos", "Un grupo de personas se refugia en un centro comercial para sobrevivir a una invasión zombie.", "Terror/Zombies", 2004, "IMAGENES/film5.jpg"),
-    new Pelicula("Train to Busan", "Pasajeros de un tren luchan por sobrevivir a un brote zombie en Corea del Sur.", "Terror/Zombies", 2016, "IMAGENES/film6.jpg")
+    new Pelicula("Train to Busan", "Pasajeros de un tren luchan por sobrevivir a un brote zombie en Corea del Sur.", "Terror/Zombies", 2016, "IMAGENES/film6.jpg"),
+    new Pelicula("Zombieland", "Un apocalipsis zombi ha estallado debido al contagio por una variación humana de la enfermedad de las vacas locas.", "Terror/Zombies", 2009, "IMAGENES/film7.jpg"),
+    new Pelicula("Resident Evil", "En un centro clandestino de investigación genética -con fines militares- de una poderosa multinacional se produce un brote vírico que contamina todo el edificio.", "Terror/Zombies", 2002, "IMAGENES/film8.jpg"),
+    new Pelicula("La tierra de los muertos vivientes", "La película explora la vida de los muertos vivientes y su rebelión contra los humanos que intentan mantener el control.", "Terror/Zombies", 2005, "IMAGENES/film9.jpg"),
 ];
 
 // Cargar películas desde localStorage si existen
