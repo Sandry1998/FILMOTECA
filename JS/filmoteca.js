@@ -1,169 +1,118 @@
-// Objeto Pelicula
-function Pelicula(nombre, descripcion, genero, anio, imagen) {
+// Objeto Pelicula 
+function Pelicula(nombre, descripcion, genero, anio, imagen, visto) {
     this.nombre = nombre;
     this.descripcion = descripcion;
     this.genero = genero;
     this.anio = anio;
     this.imagen = imagen;
+    this.visto = visto || false;
 }
 
-// Crear algunas películas de terror de zombies
-var pelicula1 = new Pelicula(
-    "La noche de los muertos vivientes",
-    "Un grupo de personas se refugia en una casa para sobrevivir a un ataque de zombies.",
-    "Terror/Zombies",
-    1968,
-    "IMAGENES/film1.jpg"
-);
+// Películas iniciales
+var peliculas = [
+    new Pelicula("La noche de los muertos vivientes", "Un grupo de personas se refugia en una casa para sobrevivir a un ataque de zombies.", "Terror/Zombies", 1968, "IMAGENES/film1.jpg"),
+    new Pelicula("Guerra Mundial Z", "Un exinvestigador de la ONU viaja por el mundo para detener una pandemia zombie.", "Terror/Zombies", 2013, "IMAGENES/film2.jpg"),
+    new Pelicula("28 semanas después", "Seis meses después del brote inicial, Londres intenta repoblarse, pero el virus vuelve a propagarse.", "Terror/Zombies", 2007, "IMAGENES/film3.jpg"),
+    new Pelicula("REC", "Una reportera y su camarógrafo quedan atrapados en un edificio infectado por un virus mortal.", "Terror/Zombies", 2007, "IMAGENES/film4.jpg"),
+    new Pelicula("El amanecer de los muertos", "Un grupo de personas se refugia en un centro comercial para sobrevivir a una invasión zombie.", "Terror/Zombies", 2004, "IMAGENES/film5.jpg"),
+    new Pelicula("Train to Busan", "Pasajeros de un tren luchan por sobrevivir a un brote zombie en Corea del Sur.", "Terror/Zombies", 2016, "IMAGENES/film6.jpg")
+];
 
-var pelicula2 = new Pelicula(
-    "Guerra Mundial Z",
-    "Un exinvestigador de la ONU viaja por el mundo para detener una pandemia zombie.",
-    "Terror/Zombies",
-    2013,
-    "IMAGENES/film2.jpg"
-);
-
-var pelicula3 = new Pelicula(
-    "28 semanas después",
-    "Seis meses después del brote inicial, Londres intenta repoblarse, pero el virus vuelve a propagarse.",
-    "Terror/Zombies",
-    2007,
-    "IMAGENES/film3.jpg"
-);
-
-var pelicula4 = new Pelicula(
-    "REC",
-    "Una reportera y su camarógrafo quedan atrapados en un edificio infectado por un virus mortal.",
-    "Terror/Zombies",
-    2007,
-    "IMAGENES/film4.jpg"
-);
-
-var pelicula5 = new Pelicula(
-    "El amanecer de los muertos",
-    "Un grupo de personas se refugia en un centro comercial para sobrevivir a una invasión zombie.",
-    "Terror/Zombies",
-    2004,
-    "IMAGENES/film5.jpg"
-);
-
-var pelicula6 = new Pelicula(
-    "Train to Busan",
-    "Pasajeros de un tren luchan por sobrevivir a un brote zombie en Corea del Sur.",
-    "Terror/Zombies",
-    2016,
-    "IMAGENES/film6.jpg"
-);
-
-// Objeto Filmoteca
-var filmoteca = {
-    peliculas: [pelicula1, pelicula2, pelicula3, pelicula4, pelicula5, pelicula6]
-};
-
-// Método para agregar una película a la filmoteca
-filmoteca.agregarPelicula = function(nombre, descripcion, genero, anio, imagen) {
-    var nuevaPelicula = new Pelicula(nombre, descripcion, genero, anio, imagen);
-    this.peliculas.push(nuevaPelicula);
-};
-
-// Guardar en localStorage
-function guardarFilmoteca() {
-    localStorage.setItem('filmoteca', JSON.stringify(filmoteca.peliculas));
-}
-// Cargar desde localStorage
-function cargarFilmoteca() {
-    var guardadas = localStorage.getItem('filmoteca');
-    if (guardadas) {
-        var pelis = JSON.parse(guardadas);
-        filmoteca.peliculas = pelis.map(function(p) {
-            return new Pelicula(p.nombre, p.descripcion, p.genero, p.anio, p.imagen);
-        });
-    }
+// Cargar del localStorage si existe
+if(localStorage.getItem('filmoteca')){
+    peliculas = JSON.parse(localStorage.getItem('filmoteca')).map(function(p){
+        return new Pelicula(p.nombre, p.descripcion, p.genero, p.anio, p.imagen, p.visto);
+    });
 }
 
-// Mostrar las películas en consola
-console.log(filmoteca);
-
-// Método de visualización en el objeto filmoteca
-filmoteca.visualizar = function() {
-    var contenedor = document.getElementById('peliculas-container');
-    contenedor.innerHTML = '';
-    this.peliculas.forEach(function(pelicula, i) {
-        var tarjeta = document.createElement('div');
-        tarjeta.className = 'pelicula-card';
-        tarjeta.innerHTML = `
-            <img src="${pelicula.imagen}" alt="${pelicula.nombre}">
-            <h2>${pelicula.nombre}</h2>
-            <p><strong>Género:</strong> ${pelicula.genero}</p>
-            <p><strong>Año:</strong> ${pelicula.anio}</p>
-            <p>${pelicula.descripcion}</p>
-            <button class="btn-borrar" data-indice="${i}">Borrar</button>
-            <button class="btn-editar" data-indice="${i}">Editar</button>
+// Mostrar películas en el HTML
+function mostrarPeliculas() {
+    var cont = document.getElementById('peliculas-container');
+    cont.innerHTML = '';
+    peliculas.forEach(function(p, i) {
+        var div = document.createElement('div');
+        div.className = 'pelicula-card';
+        var visto = p.visto ? '<span style="color:#bfa14a;font-weight:bold;">(Visto)</span>' : '';
+        var iconoVisto = p.visto ? 'IMAGENES/hide.png' : 'IMAGENES/view.png';
+        div.innerHTML = `
+            <img src="${p.imagen}" alt="${p.nombre}">
+            <h2>${p.nombre} ${visto}</h2>
+            <p><strong>Género:</strong> ${p.genero}</p>
+            <p><strong>Año:</strong> ${p.anio}</p>
+            <p>${p.descripcion}</p>
+            <div style="display:flex; justify-content:center; gap:10px; margin-top:12px;">
+                <button type="button" class="btn-accion" onclick="borrarPelicula(${i})">Borrar</button>
+                <button type="button" class="btn-accion" onclick="editarPelicula(${i})">Editar</button>
+            </div>
+            <div style="display:flex; justify-content:center; margin-top:18px;">
+                <button type="button" class="btn-accion" onclick="marcarVisto(${i})" style="background:none;box-shadow:none;padding:0;margin:0;">
+                    <img src="${iconoVisto}" alt="Visto" style="height:44px;vertical-align:middle;background:none;border:none;">
+                </button>
+            </div>
         `;
-        contenedor.appendChild(tarjeta);
+        cont.appendChild(div);
     });
-    // Eventos borrar y editar igual que antes
-    var botonesBorrar = document.querySelectorAll('.btn-borrar');
-    botonesBorrar.forEach(function(btn) {
-        btn.onclick = function() {
-            var indice = parseInt(this.getAttribute('data-indice'));
-            filmoteca.peliculas.splice(indice, 1);
-            guardarFilmoteca();
-            filmoteca.visualizar();
-        };
-    });
-    var botonesEditar = document.querySelectorAll('.btn-editar');
-    botonesEditar.forEach(function(btn) {
-        btn.onclick = function() {
-            var indice = parseInt(this.getAttribute('data-indice'));
-            var peli = filmoteca.peliculas[indice];
-            // Mostrar el formulario con los datos de la película a editar
-            document.getElementById('form-campos').style.display = 'block';
-            document.getElementById('nombre').value = peli.nombre;
-            document.getElementById('descripcion').value = peli.descripcion;
-            document.getElementById('genero').value = peli.genero;
-            document.getElementById('anio').value = peli.anio;
-            document.getElementById('imagen').value = peli.imagen;
-            document.getElementById('btn-mostrar-form').disabled = true;
-            // Hacer scroll suave al formulario
-            document.getElementById('form-campos').scrollIntoView({behavior: 'smooth'});
-            // Cambiar el evento del botón aceptar para editar
-            var btnAceptar = document.getElementById('btn-aceptar');
-            btnAceptar.onclick = function() {
-                var nombre = document.getElementById('nombre').value;
-                var descripcion = document.getElementById('descripcion').value;
-                var genero = document.getElementById('genero').value;
-                var anio = parseInt(document.getElementById('anio').value);
-                var imagen = document.getElementById('imagen').value;
-                if(nombre && descripcion && genero && anio && imagen) {
-                    filmoteca.peliculas[indice] = new Pelicula(nombre, descripcion, genero, anio, imagen);
-                    guardarFilmoteca();
-                    filmoteca.visualizar();
-                    document.getElementById('form-campos').style.display = 'none';
-                    document.getElementById('btn-mostrar-form').disabled = false;
-                    document.getElementById('nombre').value = '';
-                    document.getElementById('descripcion').value = '';
-                    document.getElementById('genero').value = '';
-                    document.getElementById('anio').value = '';
-                    document.getElementById('imagen').value = '';
-                } else {
-                    alert('Por favor, rellena todos los campos.');
-                }
-            };
-        };
-    });
+    localStorage.setItem('filmoteca', JSON.stringify(peliculas));
 }
 
-// Mostrar las películas al cargar la página
+// Agregar película
+function agregarPelicula(nombre, descripcion, genero, anio, imagen) {
+    peliculas.push(new Pelicula(nombre, descripcion, genero, anio, imagen));
+    mostrarPeliculas();
+}
+
+// Borrar película
+function borrarPelicula(i) {
+    peliculas.splice(i, 1);
+    mostrarPeliculas();
+}
+
+// Marcar como visto
+function marcarVisto(i) {
+    peliculas[i].visto = !peliculas[i].visto;
+    mostrarPeliculas();
+}
+
+// Editar película
+function editarPelicula(i) {
+    var p = peliculas[i];
+    document.getElementById('form-campos').style.display = 'block';
+    document.getElementById('nombre').value = p.nombre;
+    document.getElementById('descripcion').value = p.descripcion;
+    document.getElementById('genero').value = p.genero;
+    document.getElementById('anio').value = p.anio;
+    document.getElementById('imagen').value = p.imagen;
+    document.getElementById('btn-mostrar-form').disabled = true;
+    document.getElementById('form-campos').scrollIntoView({behavior: 'smooth'});
+    var btnAceptar = document.getElementById('btn-aceptar');
+    btnAceptar.onclick = function() {
+        var nombre = document.getElementById('nombre').value;
+        var descripcion = document.getElementById('descripcion').value;
+        var genero = document.getElementById('genero').value;
+        var anio = parseInt(document.getElementById('anio').value);
+        var imagen = document.getElementById('imagen').value;
+        if(nombre && descripcion && genero && anio && imagen) {
+            peliculas[i] = new Pelicula(nombre, descripcion, genero, anio, imagen, p.visto);
+            mostrarPeliculas();
+            document.getElementById('form-campos').style.display = 'none';
+            document.getElementById('btn-mostrar-form').disabled = false;
+            document.getElementById('nombre').value = '';
+            document.getElementById('descripcion').value = '';
+            document.getElementById('genero').value = '';
+            document.getElementById('anio').value = '';
+            document.getElementById('imagen').value = '';
+        } else {
+            alert('Por favor, rellena todos los campos.');
+        }
+    };
+}
+
+// Al cargar la página
 window.onload = function() {
-    cargarFilmoteca();
-    filmoteca.visualizar();
-    // Modificar los lugares donde se agregan, editan o borran películas para guardar
+    mostrarPeliculas();
     var btnMostrarForm = document.getElementById('btn-mostrar-form');
     var formCampos = document.getElementById('form-campos');
     var btnAceptar = document.getElementById('btn-aceptar');
-
     btnMostrarForm.onclick = function() {
         formCampos.style.display = 'block';
         btnMostrarForm.disabled = true;
@@ -174,9 +123,7 @@ window.onload = function() {
             var anio = parseInt(document.getElementById('anio').value);
             var imagen = document.getElementById('imagen').value;
             if(nombre && descripcion && genero && anio && imagen) {
-                filmoteca.agregarPelicula(nombre, descripcion, genero, anio, imagen);
-                guardarFilmoteca();
-                filmoteca.visualizar();
+                agregarPelicula(nombre, descripcion, genero, anio, imagen);
                 formCampos.style.display = 'none';
                 btnMostrarForm.disabled = false;
                 document.getElementById('nombre').value = '';

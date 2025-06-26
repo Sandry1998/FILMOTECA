@@ -103,7 +103,7 @@ h1 {
   margin-bottom: 18px;
 }
 
-.btn-borrar, .btn-editar, #btn-mostrar-form, #btn-aceptar {
+.btn-borrar, .btn-editar, #btn-mostrar-form, #btn-aceptar, .btn-accion {
     background: linear-gradient(90deg, #bfa14a 60%, #ffe082 100%);
     color: #221b29;
     border: none;
@@ -117,13 +117,52 @@ h1 {
     box-shadow: 0 2px 8px #0003;
     transition: background 0.2s, color 0.2s, transform 0.1s;
 }
-.btn-borrar:hover, .btn-editar:hover, #btn-mostrar-form:hover, #btn-aceptar:hover {
+.btn-borrar:hover, .btn-editar:hover, #btn-mostrar-form:hover, #btn-aceptar:hover, .btn-accion:hover {
     background: linear-gradient(90deg, #ffe082 60%, #bfa14a 100%);
     color: #18141c;
     transform: scale(1.05);
 }
 #form-campos {
-    scroll-margin-top: 120px;
+    display: none;
+    margin-bottom: 32px;
+    background: #2d2233ee;
+    padding: 24px 20px 20px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px #0008;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#form-campos input {
+    margin-bottom: 14px;
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1.5px solid #bfa14a;
+    background: #18141c;
+    color: #ffe082;
+    font-size: 1rem;
+    font-family: 'Georgia', serif;
+    outline: none;
+    transition: border 0.2s;
+}
+#form-campos input:focus {
+    border: 1.5px solid #ffe082;
+    background: #221b29;
+}
+#btn-aceptar {
+    width: 100%;
+    margin: 0;
+    margin-top: 8px;
+}
+
+#form-agregar {
+    display: flex !important;
+    justify-content: center;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 32px;
 }
 
 @media (max-width: 600px) {
