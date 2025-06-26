@@ -85,11 +85,11 @@ function cargarFilmoteca() {
 // Mostrar las películas en consola
 console.log(filmoteca);
 
-// Función para mostrar las películas en la web
-function mostrarPeliculas() {
+// Método de visualización en el objeto filmoteca
+filmoteca.visualizar = function() {
     var contenedor = document.getElementById('peliculas-container');
     contenedor.innerHTML = '';
-    filmoteca.peliculas.forEach(function(pelicula, i) {
+    this.peliculas.forEach(function(pelicula, i) {
         var tarjeta = document.createElement('div');
         tarjeta.className = 'pelicula-card';
         tarjeta.innerHTML = `
@@ -103,17 +103,16 @@ function mostrarPeliculas() {
         `;
         contenedor.appendChild(tarjeta);
     });
-    // Añadir evento a los botones de borrar
+    // Eventos borrar y editar igual que antes
     var botonesBorrar = document.querySelectorAll('.btn-borrar');
     botonesBorrar.forEach(function(btn) {
         btn.onclick = function() {
             var indice = parseInt(this.getAttribute('data-indice'));
             filmoteca.peliculas.splice(indice, 1);
             guardarFilmoteca();
-            mostrarPeliculas();
+            filmoteca.visualizar();
         };
     });
-    // Añadir evento a los botones de editar
     var botonesEditar = document.querySelectorAll('.btn-editar');
     botonesEditar.forEach(function(btn) {
         btn.onclick = function() {
@@ -140,7 +139,7 @@ function mostrarPeliculas() {
                 if(nombre && descripcion && genero && anio && imagen) {
                     filmoteca.peliculas[indice] = new Pelicula(nombre, descripcion, genero, anio, imagen);
                     guardarFilmoteca();
-                    mostrarPeliculas();
+                    filmoteca.visualizar();
                     document.getElementById('form-campos').style.display = 'none';
                     document.getElementById('btn-mostrar-form').disabled = false;
                     document.getElementById('nombre').value = '';
@@ -159,7 +158,7 @@ function mostrarPeliculas() {
 // Mostrar las películas al cargar la página
 window.onload = function() {
     cargarFilmoteca();
-    mostrarPeliculas();
+    filmoteca.visualizar();
     // Modificar los lugares donde se agregan, editan o borran películas para guardar
     var btnMostrarForm = document.getElementById('btn-mostrar-form');
     var formCampos = document.getElementById('form-campos');
@@ -177,7 +176,7 @@ window.onload = function() {
             if(nombre && descripcion && genero && anio && imagen) {
                 filmoteca.agregarPelicula(nombre, descripcion, genero, anio, imagen);
                 guardarFilmoteca();
-                mostrarPeliculas();
+                filmoteca.visualizar();
                 formCampos.style.display = 'none';
                 btnMostrarForm.disabled = false;
                 document.getElementById('nombre').value = '';
