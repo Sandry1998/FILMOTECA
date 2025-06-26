@@ -18,7 +18,7 @@ var peliculas = [
     new Pelicula("Train to Busan", "Pasajeros de un tren luchan por sobrevivir a un brote zombie en Corea del Sur.", "Terror/Zombies", 2016, "IMAGENES/film6.jpg")
 ];
 
-// Cargar del localStorage si existe
+// Cargar películas desde localStorage si existen
 if(localStorage.getItem('filmoteca')){
     peliculas = JSON.parse(localStorage.getItem('filmoteca')).map(function(p){
         return new Pelicula(p.nombre, p.descripcion, p.genero, p.anio, p.imagen, p.visto);
