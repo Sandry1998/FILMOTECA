@@ -37,8 +37,10 @@ function mostrarPeliculas() {
         div.className = 'pelicula-card';
         var visto = p.visto ? '<span style="color:#bfa14a;font-weight:bold;">(Visto)</span>' : '';
         var iconoVisto = p.visto ? 'IMAGENES/hide.png' : 'IMAGENES/view.png';
+        // Mostrar la imagen original de cada película
+        var imagenMostrar = p.imagen;
         div.innerHTML = `
-            <img src="${p.imagen}" alt="${p.nombre}">
+            <img src="${imagenMostrar}" alt="${p.nombre}" style="max-width:100%;height:auto;">
             <h2>${p.nombre} ${visto}</h2>
             <p><strong>Género:</strong> ${p.genero}</p>
             <p><strong>Año:</strong> ${p.anio}</p>
