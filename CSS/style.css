@@ -1,0 +1,144 @@
+body {
+  background: #18141c;
+  color: #f5e9d6;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.filmoteca-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  background: linear-gradient(90deg, #2d2233 60%, #18141c 100%);
+  padding: 48px 0 32px 0;
+  border-bottom: 3px solid #bfa14a;
+  box-shadow: 0 4px 24px #0008;
+}
+
+.filmoteca-logo {
+  height: 180px;
+  width: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px #000a;
+  border: 2px solid #bfa14a;
+  background: #fff1;
+}
+
+.filmoteca-title {
+  font-size: 3rem;
+  color: #ffe082;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 8px #000a;
+  margin: 0;
+  font-family: 'Cinzel', 'Georgia', serif;
+}
+
+.filmoteca-content {
+  max-width: 900px;
+  margin: 40px auto 0 auto;
+  background: #221b29cc;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px #000a;
+  padding: 32px 24px;
+  border: 1.5px solid #bfa14a;
+}
+
+.peliculas-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+
+.pelicula-card {
+  background: #2d2233;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px #0006;
+  border: 1.5px solid #bfa14a;
+  color: #ffe082;
+  padding: 20px 16px;
+  width: 220px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pelicula-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 32px #bfa14a88;
+}
+
+.pelicula-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #bfa14a;
+}
+
+.pelicula-card h2 {
+  font-size: 1.2rem;
+  margin: 0 0 8px 0;
+  color: #ffe082;
+}
+
+.pelicula-card p {
+  font-size: 1rem;
+  color: #f5e9d6;
+  margin: 0;
+}
+
+.pelicula-card p:last-of-type {
+  margin-bottom: 18px;
+}
+
+.btn-borrar, .btn-editar, #btn-mostrar-form, #btn-aceptar {
+    background: linear-gradient(90deg, #bfa14a 60%, #ffe082 100%);
+    color: #221b29;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 1rem;
+    font-family: 'Cinzel', 'Georgia', serif;
+    font-weight: bold;
+    margin: 6px 4px 0 0;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #0003;
+    transition: background 0.2s, color 0.2s, transform 0.1s;
+}
+.btn-borrar:hover, .btn-editar:hover, #btn-mostrar-form:hover, #btn-aceptar:hover {
+    background: linear-gradient(90deg, #ffe082 60%, #bfa14a 100%);
+    color: #18141c;
+    transform: scale(1.05);
+}
+#form-campos {
+    scroll-margin-top: 120px;
+}
+
+@media (max-width: 600px) {
+  .filmoteca-hero {
+    flex-direction: column;
+    gap: 16px;
+    padding: 32px 0 16px 0;
+  }
+  .filmoteca-title {
+    font-size: 2rem;
+  }
+  .filmoteca-content {
+    padding: 16px 4px;
+  }
+  .pelicula-card {
+    width: 100%;
+  }
+}

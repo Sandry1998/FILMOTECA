@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmoteca</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="icon" type="image/png" href="IMAGENES/camera.png">
+</head>
+<body>
+    <div class="container">
+        <div class="filmoteca-hero">
+            <img class="filmoteca-logo" src="IMAGENES/Filmoteca_Espanola_Madrid_Design_Festival_2_.jpg" alt="Filmoteca">
+            <h1 class="filmoteca-title">SAMFILMS</h1>
+        </div>
+        <div class="filmoteca-content">
+            <form id="form-agregar" style="margin-bottom: 32px; display: flex; gap: 12px; align-items: center;">
+                <button type="button" id="btn-mostrar-form">Agregar Película</button>
+            </form>
+            <div id="form-campos" style="display:none; margin-bottom: 32px; background: #221b29cc; padding: 16px; border-radius: 8px; box-shadow: 0 2px 8px #0006;">
+                <input type="text" id="nombre" placeholder="Nombre" required style="margin-bottom: 8px; display: block; width: 100%;">
+                <input type="text" id="descripcion" placeholder="Descripción" required style="margin-bottom: 8px; display: block; width: 100%;">
+                <input type="text" id="genero" placeholder="Género" required style="margin-bottom: 8px; display: block; width: 100%;">
+                <input type="number" id="anio" placeholder="Año" required style="margin-bottom: 8px; display: block; width: 100%;">
+                <input type="text" id="imagen" placeholder="Ruta de imagen (ej: IMAGENES/film7.jpg)" required style="margin-bottom: 8px; display: block; width: 100%;">
+                <button type="button" id="btn-aceptar">Aceptar</button>
+            </div>
+            <div id="peliculas-container" class="peliculas-container">
+                <!-- Las tarjetas de películas se insertarán aquí mediante JavaScript -->
+            </div>
+        </div>
+    </div>
+    <script src="JS/filmoteca.js"></script>
+</body>
+</html>
